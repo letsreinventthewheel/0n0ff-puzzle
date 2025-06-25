@@ -1,0 +1,46 @@
+#game-header {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px;
+
+  .counter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 50px;
+    padding: 0 5px;
+    background: rgb(180, 170, 160);
+    margin-right: 6px;
+    font-weight: bold;
+    &:last-child {
+      margin-right: 0;
+    }
+
+    .counter-title {
+      padding: 0;
+      margin: 0;
+      color: rgb(240, 235, 230);
+    }
+
+    .counter-value {
+      padding: 0;
+      margin: 0;
+      color: white;
+      font-size: 20px;
+    }
+  }
+
+  #game-title {
+    flex-grow: 1;
+
+    h1 {
+      font-family: Fira Code;
+      color: rgb(110, 100, 90);
+      font-size: 80px;
+      margin: 0;
+      padding: 0;
+      line-height: 60px;
+
+    }
+  }
+}

@@ -1,0 +1,60 @@
+#game-container {
+  background: rgb(180, 170, 160);
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  border-radius: 6px;
+  position: relative;
+
+  #win-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 3rem;
+    animation: winAnimation 1s forwards;
+    pointer-events: none;
+  }
+
+  .game-row {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 12px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .game-cell {
+      cursor: pointer;
+      width: 97.5px;
+      height: 97.5px;
+      margin-right: 12px;
+      border-radius: 6px;
+      transition: transform 0.5s, background 0.5s;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    .red-cell {
+      background: rgb(210, 90, 90);
+    }
+
+    .green-cell {
+      background: rgb(90, 150, 120);
+      transform: rotateY(180deg);
+    }
+  }
+}
+
+@keyframes winAnimation {
+  to {
+    background: rgba(255, 255, 255, 0.8);
+  }
+}
