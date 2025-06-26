@@ -5,12 +5,13 @@ import "./GameField.css";
 export const GameField: React.FC<Record<never, never>> = () => {
   const {
     state: { grid, hasWon },
+    resetGame,
     toggleCell,
   } = useGame();
 
   return (
     <div id="game-container">
-      {grid.map((row, rowIdx) => (
+      {grid.current.map((row, rowIdx) => (
         <div className="game-row" key={`game-row-${rowIdx}`}>
           {row.map((cell, cellIdx) => (
             <div
@@ -22,7 +23,12 @@ export const GameField: React.FC<Record<never, never>> = () => {
         </div>
       ))}
 
-      {hasWon && <div id="win-overlay">You Won</div>}
+      {hasWon && (
+        <div id="win-overlay">
+          <p>You Won</p>
+          <button onClick={resetGame}>Reset Game</button>
+        </div>
+      )}
     </div>
   );
 };

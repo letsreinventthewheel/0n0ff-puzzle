@@ -7,8 +7,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 50px;
-    padding: 0 5px;
+    min-width: 60px;
+    padding: 5px 5px;
     background: rgb(180, 170, 160);
     margin-right: 6px;
     font-weight: bold;
@@ -17,6 +17,8 @@
     }
 
     .counter-title {
+      line-height: 1;
+      text-transform: uppercase;
       padding: 0;
       margin: 0;
       color: rgb(240, 235, 230);
@@ -26,7 +28,7 @@
       padding: 0;
       margin: 0;
       color: white;
-      font-size: 20px;
+      font-size: 23px;
     }
   }
 

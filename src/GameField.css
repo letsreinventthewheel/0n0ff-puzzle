@@ -14,12 +14,20 @@
     height: 100%;
     background: rgba(255, 255, 255, 0);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     font-weight: bold;
     font-size: 3rem;
     animation: winAnimation 1s forwards;
-    pointer-events: none;
+
+    p {
+      pointer-events: none;
+    }
+
+    button {
+      padding: 10px 15px;
+    }
   }
 
   .game-row {

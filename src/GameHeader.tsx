@@ -3,7 +3,7 @@ import "./GameHeader.css";
 
 export const GameHeader: React.FC<Record<never, never>> = () => {
   const {
-    state: { movesCount },
+    state: { movesCount, solver },
   } = useGame();
 
   return (
@@ -17,7 +17,9 @@ export const GameHeader: React.FC<Record<never, never>> = () => {
       </div>
       <div className="counter">
         <div className="counter-title">Best</div>
-        <div className="counter-value">?</div>
+        <div className="counter-value">
+          {solver.current.length} ({solver.initial.length})
+        </div>
       </div>
     </div>
   );

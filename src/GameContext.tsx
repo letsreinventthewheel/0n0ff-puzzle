@@ -1,9 +1,10 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useMemo, useReducer } from "react";
 import { gameReducer, initialGameState, type GameState } from "./Game";
 
 interface GameContextType {
   state: GameState;
   newGame: () => void;
+  resetGame: () => void;
   toggleCell: (row: number, column: number) => void;
 }
 
@@ -14,10 +15,15 @@ interface GameProviderProps {
 }
 
 export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
-  const [state, dispatch] = useReducer(gameReducer, initialGameState);
+  const gameState = useMemo(() => initialGameState(), []);
+  const [state, dispatch] = useReducer(gameReducer, gameState);
 
   const newGame = () => {
     dispatch({ type: "NEW_GAME" });
+  };
+
+  const resetGame = () => {
+    dispatch({ type: "RESET_GAME" });
   };
 
   const toggleCell = (row: number, column: number) => {
@@ -27,6 +33,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
   const value: GameContextType = {
     state,
     newGame,
+    resetGame,
     toggleCell,
   };
 

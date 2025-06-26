@@ -1,7 +1,19 @@
+import { solve } from "./Solver";
+
 export const GRID_SIZE = 4;
 
+export type Grid = boolean[][];
+export type Move = { row: number; column: number };
+
 export interface GameState {
-  grid: boolean[][];
+  grid: {
+    initial: Grid;
+    current: Grid;
+  };
+  solver: {
+    initial: Move[];
+    current: Move[];
+  };
   movesCount: number;
   hasWon: boolean;
 }
@@ -16,14 +28,26 @@ export const initializeGrid = () => {
     );
 };
 
-export const initialGameState: GameState = {
-  grid: initializeGrid(),
-  movesCount: 0,
-  hasWon: false,
+export const initialGameState = (): GameState => {
+  const grid = initializeGrid();
+  const moves = solve(grid);
+  return {
+    grid: {
+      initial: structuredClone(grid),
+      current: grid,
+    },
+    solver: {
+      initial: structuredClone(moves),
+      current: moves,
+    },
+    movesCount: 0,
+    hasWon: false,
+  };
 };
 
 export type GameAction =
   | { type: "NEW_GAME" }
+  | { type: "RESET_GAME" }
   | { type: "TOGGLE_CELL"; row: number; column: number };
 
 const toggleCell = (
@@ -50,8 +74,18 @@ export const gameReducer = (
 ): GameState => {
   switch (action.type) {
     case "NEW_GAME":
+      return initialGameState();
+
+    case "RESET_GAME":
       return {
-        grid: initializeGrid(),
+        grid: {
+          initial: structuredClone(state.grid.initial),
+          current: state.grid.initial,
+        },
+        solver: {
+          initial: structuredClone(state.solver.initial),
+          current: state.solver.initial,
+        },
         movesCount: 0,
         hasWon: false,
       };
@@ -62,15 +96,23 @@ export const gameReducer = (
       }
 
       const newGrid: boolean[][] = toggleCell(
-        state.grid,
+        state.grid.current,
         action.row,
         action.column,
       );
       const newMovesCount = state.movesCount + 1;
       const hasWon = newGrid.every((row) => row.every((cell) => cell));
+      const moves = solve(newGrid);
 
       return {
-        grid: newGrid,
+        grid: {
+          initial: state.grid.initial,
+          current: newGrid,
+        },
+        solver: {
+          initial: state.solver.initial,
+          current: moves,
+        },
         movesCount: newMovesCount,
         hasWon,
       };

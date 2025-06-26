@@ -1,0 +1,38 @@
+#game-solution-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  opacity: 0.5;
+
+  #game-solution {
+    display: flex;
+    flex-direction: column;
+
+    .solution-row {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 6px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .solution-cell {
+        background: rgba(100, 100, 100, 0.3);
+        border: 1px solid rgba(120, 120, 120, 0.4);
+        width: 30px;
+        height: 30px;
+        margin-right: 6px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+      .solution-cell.next-move {
+        background: rgba(20, 20, 20, 0.6);
+        border: 1px solid rgba(30, 30, 30, 0.8);
+        box-shadow: 0 0 4px rgba(100, 100, 100, 0.8);
+        filter: blur(0.8px);
+      }
+    }
+  }
+}

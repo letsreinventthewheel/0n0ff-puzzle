@@ -11,3 +11,22 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 3px;
+  padding: 0 15px;
+  color: rgb(250, 245, 240);
+  font-weight: bold;
+  font-size: 1rem;
+  background: rgb(140, 120, 100);
+
+  &:hover {
+    background: rgb(160, 140, 110);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
